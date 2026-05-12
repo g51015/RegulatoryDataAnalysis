@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>人民银行2026年4月行政处罚分析报告 V1.1</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #1a365d;
+  --secondary: #2b6cb0;
+  --light-blue: #4299e1;
+  --gold: #c9a96e;
+  --red: #e53e3e;
+  --orange: #dd6b20;
+  --green: #38a169;
+  --bg-light: #f7fafc;
+  --white: #ffffff;
+  --text-dark: #1a202c;
+  --text-medium: #4a5568;
+  --text-light: #718096;
+  --border: #e2e8f0;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== HEADER ===== */
+.report-header {
+  background: linear-gradient(135deg, var(--primary) 0%, #2d4a7a 50%, #1a365d 100%);
+  color: var(--white);
+  padding: 48px 20px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.report-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(201,169,110,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(66,153,225,0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+.header-badge {
+  display: inline-block;
+  background: rgba(201,169,110,0.2);
+  border: 1px solid rgba(201,169,110,0.4);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.report-header h1 {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.report-header .subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.report-header .date {
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 500;
+}
+.header-line {
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin: 16px auto;
+  border-radius: 2px;
+}
+.version-tag {
+  display: inline-block;
+  background: rgba(66,153,225,0.2);
+  border: 1px solid rgba(66,153,225,0.4);
+  color: var(--light-blue);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ===== SECTION ===== */
+.section {
+  margin-top: 24px;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  padding: 14px 0 10px;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ===== KPI CARDS ===== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.kpi-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.kpi-card:active { transform: scale(0.98); }
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--gold));
+}
+.kpi-card .kpi-value {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.2;
+}
+.kpi-card .kpi-unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+}
+.kpi-card .kpi-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ===== CHART CARD ===== */
+.chart-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.chart-card .chart-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  padding-left: 10px;
+  border-left: 3px solid var(--gold);
+}
+.chart-container {
+  width: 100%;
+  height: 320px;
+}
+.chart-container.tall { height: 400px; }
+.chart-container.short { height: 260px; }
+
+/* ===== TABLE ===== */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 -4px;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 600px;
+}
+.data-table thead th {
+  background: var(--primary);
+  color: var(--white);
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.data-table thead th:first-child { border-radius: 6px 0 0 0; }
+.data-table thead th:last-child { border-radius: 0 6px 0 0; }
+.data-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-medium);
+  vertical-align: top;
+}
+.data-table tbody tr:nth-child(even) { background: var(--bg-light); }
+.data-table .rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+}
+.rank-1 { background: linear-gradient(135deg, #c9a96e, #e8d5a3); }
+.rank-2 { background: linear-gradient(135deg, #a0aec0, #cbd5e0); }
+.rank-3 { background: linear-gradient(135deg, #c67a3c, #e8a87c); }
+.rank-n { background: var(--text-light); }
+.amount-highlight {
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* ===== ANALYSIS TEXT ===== */
+.analysis-text {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-medium);
+}
+.analysis-text p {
+  margin-bottom: 10px;
+  text-indent: 2em;
+}
+.analysis-text p:last-child {
+  margin-bottom: 0;
+}
+.analysis-text b {
+  color: var(--primary);
+}
+
+/* ===== INSIGHT BOX ===== */
+.insight-box {
+  background: linear-gradient(135deg, #f0f5ff 0%, #ffffff 100%);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  padding: 16px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-medium);
+  box-shadow: var(--shadow);
+}
+.insight-box p {
+  margin: 0;
+}
+.insight-box b {
+  color: var(--primary);
+}
+
+/* ===== RISK ALERT CARD ===== */
+.risk-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  border-left: 4px solid var(--red);
+  position: relative;
+}
+.risk-card.continuous { border-left-color: var(--red); }
+.risk-card.pulse { border-left-color: var(--orange); }
+.risk-card .risk-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.risk-card .risk-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.risk-card .risk-tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.risk-tag.continuous {
+  background: rgba(229,62,62,0.1);
+  color: var(--red);
+}
+.risk-tag.pulse {
+  background: rgba(221,107,32,0.1);
+  color: var(--orange);
+}
+.risk-card .risk-desc {
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.risk-card .risk-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.risk-card .risk-meta span {
+  font-size: 11px;
+  color: var(--text-light);
+  background: var(--bg-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* ===== DEEP DIVE CARD ===== */
+.deep-dive {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.deep-dive .dive-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.deep-dive .dive-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.deep-dive .dive-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.deep-dive .dive-subtitle {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+.deep-dive .dive-body {
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.8;
+}
+.deep-dive .dive-body p {
+  margin-bottom: 8px;
+  text-indent: 2em;
+}
+.deep-dive .dive-body p:last-child { margin-bottom: 0; }
+.deep-dive .dive-body b { color: var(--primary); }
+.deep-dive .dive-comment {
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+.deep-dive .dive-comment::before {
+  content: '合规点评';
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+/* ===== KEYWORD TAG CLOUD ===== */
+.keyword-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+.keyword-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  white-space: nowrap;
+}
+.keyword-tag .kw-count {
+  background: rgba(255,255,255,0.3);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+/* ===== TIER CARD ===== */
+.tier-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.tier-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.tier-card .tier-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.tier-card .tier-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  color: var(--white);
+}
+.tier-card .tier-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.tier-card .tier-desc {
+  font-size: 13px;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+.tier-card .tier-provinces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.tier-card .tier-provinces span {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  background: var(--bg-light);
+  color: var(--text-medium);
+}
+
+/* ===== ADVICE CARD ===== */
+.advice-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--gold);
+  margin-bottom: 12px;
+}
+.advice-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.advice-card h3 .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.advice-card ul {
+  list-style: none;
+  padding: 0;
+}
+.advice-card ul li {
+  font-size: 13px;
+  color: var(--text-medium);
+  padding: 4px 0 4px 20px;
+  position: relative;
+  line-height: 1.7;
+}
+.advice-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* ===== FOOTER ===== */
+.report-footer {
+  margin-top: 32px;
+  padding: 24px 16px;
+  background: var(--primary);
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.8;
+}
+.report-footer .footer-line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 12px auto;
+  border-radius: 1px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 640px) {
+  .report-header h1 { font-size: 32px; }
+  .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  .container { padding: 0 24px; }
+  .chart-container { height: 360px; }
+  .chart-container.tall { height: 440px; }
+  .tier-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 960px; }
+  .report-header h1 { font-size: 36px; }
+  .report-header { padding: 64px 20px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="report-header">
+  <div class="header-badge">REGULATORY ANALYSIS</div>
+  <h1>人民银行2026年4月<br>行政处罚分析报告<span class="version-tag">V1.1</span></h1>
+  <div class="header-line"></div>
+  <p class="subtitle">基于中国人民银行各分支机构公开行政处罚信息的统计分析</p>
+  <p class="date">发布日期：2026年5月</p>
+</header>
+
+<div class="container">
+
+  <!-- ========== KPI CARDS ========== -->
+  <section class="section">
+    <div class="section-title">核心数据概览</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value">126<span class="kpi-unit">件</span></div>
+        <div class="kpi-label">总处罚数量</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">11,332<span class="kpi-unit">万</span></div>
+        <div class="kpi-label">处罚总金额（万元）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">27<span class="kpi-unit">个</span></div>
+        <div class="kpi-label">涉及省级行政区</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value">97<span class="kpi-unit"> / </span>29</div>
+        <div class="kpi-label">机构处罚 / 个人处罚</div>
+      </div>
+    </div>
+    <div class="analysis-text">
+      <p>本月行政处罚呈现以下核心特征：</p>
+      <p><b>反洗钱仍是监管重中之重</b>：反洗钱与客户身份识别类处罚以73次违规记录高居首位，涉及处罚金额占比最大，反映出人民银行对反洗钱义务履行的持续高压态势。</p>
+      <p><b>中小银行是处罚集中区域</b>：农村商业银行以40笔处罚、2,102.28万元罚金位居机构类型首位，农村信用社以16笔紧随其后，中小金融机构合规能力薄弱的问题依然突出。</p>
+      <p><b>"双罚制"全面落实</b>：29名个人被同步处罚，占总处罚数量的23.0%，但个人罚款总额仅95.75万元（占0.8%），"罚机构为主、罚个人为辅"的特征明显。</p>
+      <p><b>多违规类型叠加成为大额处罚主因</b>：Top 10大额处罚均涉及4类以上违规行为，违规领域的交叉叠加显著推高了处罚金额。</p>
+      <p><b>浙江以金额居首、安徽广东以数量领先</b>：地区分布呈现"经济发达地区金额高、中西部省份频次多"的差异化格局。</p>
+    </div>
+  </section>
+
+  <!-- ========== 风险预警雷达 ========== -->
+  <section class="section">
+    <div class="section-title">合规风险预警</div>
+    <div class="risk-card continuous">
+      <div class="risk-header">
+        <span class="risk-title">风险点一：反洗钱客户尽职调查流于形式</span>
+        <span class="risk-tag continuous">连续型风险</span>
+      </div>
+      <div class="risk-desc">"未按照规定开展客户尽职调查"出现28次，"客户尽职调查"出现13次，涉及73笔反洗钱违规中的绝大多数。大量机构在客户准入环节未充分核实身份信息，对高风险客户缺乏强化尽职调查。</div>
+      <div class="risk-meta">
+        <span>涉及73笔违规</span>
+        <span>影响全部机构类型</span>
+        <span>风险等级：高</span>
+      </div>
+    </div>
+    <div class="risk-card continuous">
+      <div class="risk-header">
+        <span class="risk-title">风险点二：可疑交易报告质量不达标</span>
+        <span class="risk-tag continuous">连续型风险</span>
+      </div>
+      <div class="risk-desc">"未按规定报告可疑交易"出现18次，"可疑交易"出现7次。部分机构存在可疑交易漏报、迟报、报告质量不高等问题，反映出监测模型和人工分析能力的双重不足。</div>
+      <div class="risk-meta">
+        <span>涉及18+笔违规</span>
+        <span>重点影响：农商行、城商行</span>
+        <span>风险等级：高</span>
+      </div>
+    </div>
+    <div class="risk-card continuous">
+      <div class="risk-header">
+        <span class="risk-title">风险点三：征信查询授权管理不规范</span>
+        <span class="risk-tag continuous">连续型风险</span>
+      </div>
+      <div class="risk-desc">"违反信用信息查询及相关管理规定"出现21次，征信管理违规共48笔。农信社（11笔）和农商行（19笔）是征信违规的主要群体，合计占该领域违规的62.5%。</div>
+      <div class="risk-meta">
+        <span>涉及48笔违规</span>
+        <span>重点影响：农信社、农商行</span>
+        <span>风险等级：中高</span>
+      </div>
+    </div>
+    <div class="risk-card continuous">
+      <div class="risk-header">
+        <span class="risk-title">风险点四：金融统计数据报送质量差</span>
+        <span class="risk-tag continuous">连续型风险</span>
+      </div>
+      <div class="risk-desc">"违反金融统计管理规定"出现60次，"未按照规定报送"出现22次。统计数据报送不及时、不准确、不完整是普遍问题，国有大行和村镇银行是高发群体。</div>
+      <div class="risk-meta">
+        <span>涉及49笔违规</span>
+        <span>重点影响：国有大行、村镇银行</span>
+        <span>风险等级：中</span>
+      </div>
+    </div>
+    <div class="risk-card continuous">
+      <div class="risk-header">
+        <span class="risk-title">风险点五：违规开立账户问题突出</span>
+        <span class="risk-tag continuous">连续型风险</span>
+      </div>
+      <div class="risk-desc">"违反账户管理规定"出现30次，"未按照规定开立账户"出现29次。账户实名制落实不到位、违规开立账户是支付结算领域的核心问题。</div>
+      <div class="risk-meta">
+        <span>涉及46笔违规</span>
+        <span>重点影响：农商行、股份制银行</span>
+        <span>风险等级：中</span>
+      </div>
+    </div>
+    <div class="risk-card pulse">
+      <div class="risk-header">
+        <span class="risk-title">风险点六：网络安全与数据安全违规升温</span>
+        <span class="risk-tag pulse">脉冲型风险</span>
+      </div>
+      <div class="risk-desc">"违反网络安全规定"和"违反数据安全规定"各出现10余次，共16笔违规。在《数据安全法》《个人信息保护法》背景下，该领域处罚预计将持续上升，城商行和国有大行需重点关注。</div>
+      <div class="risk-meta">
+        <span>涉及16笔违规</span>
+        <span>重点影响：城商行、国有大行</span>
+        <span>风险等级：中高（上升趋势）</span>
+      </div>
+    </div>
+    <div class="risk-card pulse">
+      <div class="risk-header">
+        <span class="risk-title">风险点七：支付机构反洗钱合规系统性失守</span>
+        <span class="risk-tag pulse">脉冲型风险</span>
+      </div>
+      <div class="risk-desc">支付机构平均单笔罚款高达381.78万元，远超银行业平均水平。寻汇支付单笔被罚1,431.60万元，涉及反洗钱、支付结算、金融消保、内部合规四大领域，释放出"严监管、零容忍"信号。</div>
+      <div class="risk-meta">
+        <span>涉及4笔违规</span>
+        <span>重点影响：支付机构</span>
+        <span>风险等级：高（单笔金额大）</span>
+      </div>
+    </div>
+    <div class="risk-card pulse">
+      <div class="risk-header">
+        <span class="risk-title">风险点八：中小金融机构多领域叠加违规</span>
+        <span class="risk-tag pulse">脉冲型风险</span>
+      </div>
+      <div class="risk-desc">Top 10大额处罚均涉及4类以上违规领域，"打包式"处罚成为常态。中小金融机构（农商行、农信社、城商行）因合规资源有限，多业务条线同时出现系统性问题的风险最高。</div>
+      <div class="risk-meta">
+        <span>涉及Top 10全部案例</span>
+        <span>重点影响：中小银行</span>
+        <span>风险等级：高</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 违规关键词分析 ========== -->
+  <section class="section">
+    <div class="section-title">高频违规关键词</div>
+    <div class="analysis-text">
+      <p>通过对本月126笔处罚的违法事实进行关键词频率分析，可以直观识别监管关注的核心问题。以下为出现频次最高的违规行为描述：</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">违规关键词出现频次 Top 10</div>
+      <div id="chartKeywords" class="chart-container tall"></div>
+    </div>
+    <div class="analysis-text">
+      <p>关键词分析揭示了三大违规高发带：<b>反洗钱领域</b>（客户尽职调查、可疑交易报告）、<b>征信管理领域</b>（信用信息查询、征信管理）、<b>支付结算领域</b>（账户管理、支付结算）。这三条"违规主线"合计覆盖了超过85%的处罚记录，应作为金融机构合规资源配置的优先方向。</p>
+    </div>
+  </section>
+
+  <!-- ========== 机构类型分布 ========== -->
+  <section class="section">
+    <div class="section-title">机构类型分布</div>
+    <div class="chart-card">
+      <div class="chart-title">按处罚数量 Top 10 机构子类型</div>
+      <div id="chartOrgType" class="chart-container tall"></div>
+    </div>
+    <div class="analysis-text">
+      <p>从机构类型来看，<b>农村商业银行</b>以40笔处罚（占31.7%）位居首位，但平均单笔罚款仅52.56万元，反映出违规面广但严重程度相对较低的特征。<b>国有大型商业银行</b>虽然处罚笔数仅占15.1%，但平均单笔罚款达126.0万元，体现了"大行大责"的监管导向。</p>
+      <p>值得特别关注的是，<b>支付机构</b>虽然仅有4笔处罚，但平均单笔罚款高达381.78万元，远超银行业平均水平。其中寻汇支付单笔被罚1,431.60万元，为本月最大罚单，释放出人民银行对支付行业"严监管、零容忍"的明确信号。</p>
+      <p><b>城市商业银行</b>平均单笔罚款240.69万元位居银行业首位，其违规类型中网络安全与数据安全领域占比超过一半，反映出城商行在数字化转型过程中的安全合规风险。</p>
+    </div>
+  </section>
+
+  <!-- ========== 处罚分类分布 ========== -->
+  <section class="section">
+    <div class="section-title">处罚分类分布</div>
+    <div class="chart-card">
+      <div class="chart-title">按处罚分类出现次数 Top 8</div>
+      <div id="chartCategory" class="chart-container"></div>
+    </div>
+    <div class="analysis-text">
+      <p>前四大监管职能——<b>反洗钱、金融统计、征信管理、支付结算</b>——合计占比达85.0%，构成了人民银行行政处罚的"主阵地"。这四大领域应成为金融机构合规资源配置的优先方向。</p>
+    </div>
+  </section>
+
+  <!-- ========== 领域深度剖析 ========== -->
+  <section class="section">
+    <div class="section-title">重点违规领域深度剖析</div>
+
+    <!-- 反洗钱 -->
+    <div class="deep-dive">
+      <div class="dive-header">
+        <div class="dive-icon" style="background:rgba(229,62,62,0.1);color:var(--red);">&#x1F6D1;</div>
+        <div>
+          <div class="dive-title">反洗钱与客户身份识别</div>
+          <div class="dive-subtitle">73笔违规 | 占比28.7% | 涉及全部机构类型</div>
+        </div>
+      </div>
+      <div class="dive-body">
+        <p>反洗钱连续保持处罚频次首位，涉及机构类型广泛，几乎覆盖所有被处罚机构。核心问题集中在客户尽职调查缺失（"未按照规定开展客户尽职调查"出现28次）和可疑交易报告不力（"未按规定报告可疑交易"出现18次）。</p>
+        <p>从机构分布看，农商行以27笔反洗钱违规居首，国有大行7笔、股份制银行8笔紧随其后。值得注意的是，证券和财险公司也各有2笔反洗钱违规，反映出非银金融机构在反洗钱义务履行方面的普遍不足。</p>
+        <p>随着《反洗钱法》修订落地，客户尽职调查的穿透性要求和受益所有人识别的准确性将成为监管重点，处罚力度有望进一步加大。</p>
+      </div>
+      <div class="dive-comment">
+        反洗钱合规已进入"深水区"。监管正从"制度有无"向"执行效果"转变，机构需重点加强客户尽职调查的穿透深度，提升可疑交易监测系统的智能化水平，减少漏报、迟报。建议各机构定期开展反洗钱专项审计，确保内控制度真正落地。
+      </div>
+    </div>
+
+    <!-- 金融统计 -->
+    <div class="deep-dive">
+      <div class="dive-header">
+        <div class="dive-icon" style="background:rgba(43,108,176,0.1);color:var(--secondary);">&#x1F4CA;</div>
+        <div>
+          <div class="dive-title">金融统计</div>
+          <div class="dive-subtitle">49笔违规 | 占比19.3% | 高发群体：国有大行、村镇银行</div>
+        </div>
+      </div>
+      <div class="dive-body">
+        <p>金融统计违规以49笔位居第二，"违反金融统计管理规定"出现60次，"未按照规定报送"出现22次。主要问题包括统计数据报送不及时、不准确、不完整，统计指标口径理解偏差导致数据错报，以及统计系统与业务系统数据不一致。</p>
+        <p>国有大行和村镇银行是金融统计违规的高发群体，分别涉及10笔和7笔。国有大行因业务复杂度高，统计数据整合难度大；村镇银行则因统计人员专业能力不足，数据质量管理薄弱。</p>
+      </div>
+      <div class="dive-comment">
+        金融统计数据质量是监管决策的重要基础。机构应建立数据质量考核与问责制度，推动统计系统与业务系统的数据一致性校验，加强统计人员专业培训，从源头上提升数据报送质量。
+      </div>
+    </div>
+
+    <!-- 征信管理 -->
+    <div class="deep-dive">
+      <div class="dive-header">
+        <div class="dive-icon" style="background:rgba(201,169,110,0.15);color:var(--gold);">&#x1F50D;</div>
+        <div>
+          <div class="dive-title">征信与信用信息管理</div>
+          <div class="dive-subtitle">48笔违规 | 占比18.9% | 高发群体：农商行、农信社</div>
+        </div>
+      </div>
+      <div class="dive-body">
+        <p>征信管理违规以48笔紧随金融统计之后，"违反信用信息查询及相关管理规定"出现21次。主要问题包括未经授权查询个人征信报告、征信信息报送不准确、征信系统用户管理不规范。</p>
+        <p>农信社（11笔）和农商行（19笔）是征信违规的主要群体，合计占该领域违规的62.5%。这与中小银行信贷业务高度依赖征信数据、但征信内控管理相对薄弱的现状密切相关。</p>
+      </div>
+      <div class="dive-comment">
+        征信合规是中小银行面临的最突出风险之一。建议建立征信查询全流程管控机制，严格授权管理，定期开展征信合规自查，建立内部审计机制，从制度和系统两个层面堵塞漏洞。
+      </div>
+    </div>
+
+    <!-- 支付结算 -->
+    <div class="deep-dive">
+      <div class="dive-header">
+        <div class="dive-icon" style="background:rgba(66,153,225,0.1);color:var(--light-blue);">&#x1F4B3;</div>
+        <div>
+          <div class="dive-title">支付结算与账户管理</div>
+          <div class="dive-subtitle">46笔违规 | 占比18.1% | 高发群体：农商行、股份制银行</div>
+        </div>
+      </div>
+      <div class="dive-body">
+        <p>支付结算违规关键词"违反账户管理规定"出现30次，"违反支付结算管理规定"出现9次。核心问题包括违规开立账户（"未按照规定开立账户"出现29次）、账户实名制落实不到位、支付业务合规管理缺失。</p>
+        <p>股份制银行（7笔）和农商行（13笔）在该领域违规较为集中，反映出在支付业务竞争加剧的背景下，部分机构存在放松账户管理标准的倾向。兴业银行广州分行因支付结算违规被单罚251.35万元，值得警惕。</p>
+      </div>
+      <div class="dive-comment">
+        账户管理是支付合规的基石。在支付业务创新加速的背景下，机构需严格落实账户实名制要求，加强交易监测，平衡业务发展与合规管理的关系。建议建立账户全生命周期管理机制，从开户到销户实施全流程管控。
+      </div>
+    </div>
+
+    <!-- 网络安全与数据安全 -->
+    <div class="deep-dive">
+      <div class="dive-header">
+        <div class="dive-icon" style="background:rgba(221,107,32,0.1);color:var(--orange);">&#x1F512;</div>
+        <div>
+          <div class="dive-title">网络安全与数据安全</div>
+          <div class="dive-subtitle">16笔违规 | 占比6.3% | 上升趋势 | 重点影响：城商行、国有大行</div>
+        </div>
+      </div>
+      <div class="dive-body">
+        <p>网络安全与数据安全违规虽仅16笔，但增长趋势值得关注。"违反网络安全规定"和"违反数据安全规定"各出现10余次。城商行（4笔）和国有大行（3笔）在该领域违规较为突出。</p>
+        <p>该领域违规在多笔大额处罚中作为叠加因素出现（如中原银行884.37万元、农行河南分行441.10万元等），反映出随着金融数字化的深入推进，数据安全合规已成为各类机构不可忽视的监管要求。</p>
+      </div>
+      <div class="dive-comment">
+        数据安全是金融数字化转型的"生命线"。在《数据安全法》《个人信息保护法》实施背景下，该领域处罚预计将持续上升。机构应完善数据分类分级管理制度，落实数据安全保护技术措施，建立数据安全事件应急响应机制。
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 地区分布 ========== -->
+  <section class="section">
+    <div class="section-title">地区分布与梯队分析</div>
+    <div class="chart-card">
+      <div class="chart-title">按省份处罚数量 Top 15</div>
+      <div id="chartProvince" class="chart-container tall"></div>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-badge" style="background:var(--red);">第一梯队</span>
+          <span class="tier-name">高频高金额地区</span>
+        </div>
+        <div class="tier-desc">处罚笔数多且平均单笔金额高，监管执法力度大，违规问题较为严重。</div>
+        <div class="tier-provinces">
+          <span>浙江（4笔/1,656万）</span>
+          <span>广东（10笔/814万）</span>
+          <span>新疆（5笔/633万）</span>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-badge" style="background:var(--orange);">第二梯队</span>
+          <span class="tier-name">高频中金额地区</span>
+        </div>
+        <div class="tier-desc">处罚笔数多但平均单笔金额中等，以中小金融机构常规性违规为主。</div>
+        <div class="tier-provinces">
+          <span>安徽（10笔/665万）</span>
+          <span>广西（9笔/733万）</span>
+          <span>河北（8笔/537万）</span>
+          <span>四川（6笔/374万）</span>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-badge" style="background:var(--secondary);">第三梯队</span>
+          <span class="tier-name">中频低金额地区</span>
+        </div>
+        <div class="tier-desc">处罚笔数中等且平均单笔金额较低，违规以操作层面问题为主。</div>
+        <div class="tier-provinces">
+          <span>青海（7笔/379万）</span>
+          <span>福建（7笔/283万）</span>
+          <span>山东（7笔/239万）</span>
+          <span>陕西（7笔/212万）</span>
+          <span>山西（6笔/181万）</span>
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-badge" style="background:var(--text-light);">特殊关注</span>
+          <span class="tier-name">单笔大额处罚地区</span>
+        </div>
+        <div class="tier-desc">虽然处罚笔数不多，但出现超大型罚单，需关注个别机构的重大合规缺陷。</div>
+        <div class="tier-provinces">
+          <span>河南（中原银行884万+农行441万）</span>
+          <span>海南（中行海南分行765万）</span>
+          <span>辽宁（农行辽宁分行327万）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-text">
+      <p><b>中西部地区监管活跃度提升</b>：青海、陕西、广西等中西部省份的处罚笔数位居前列，反映出人民银行分支机构监管覆盖面持续扩大，中西部金融合规监管力度正在加强。</p>
+      <p><b>地区差异化特征明显</b>：浙江因支付机构大额罚单导致金额居首，安徽、广东以中小银行常规违规为主，河南、海南则因个别大行分支机构的大额处罚而金额突出。机构应关注所在地区的监管执法特点，有针对性地配置合规资源。</p>
+    </div>
+  </section>
+
+  <!-- ========== 金额分布 ========== -->
+  <section class="section">
+    <div class="section-title">处罚金额分布</div>
+    <div class="chart-card">
+      <div class="chart-title">各金额区间处罚数量</div>
+      <div id="chartAmount" class="chart-container short"></div>
+    </div>
+    <div class="analysis-text">
+      <p>金额分布呈现明显的<b>"双峰"特征</b>：近58%的处罚集中在50万元以下的中小金额区间（第一峰），反映出大量违规行为属于操作层面的常规性问题；而100万元以上的大额处罚占比达24.6%（第二峰），这些案件通常涉及系统性合规缺陷或多领域叠加违规。</p>
+      <p>3笔500万元以上的超大型处罚合计占全月罚没总额的<b>27.2%</b>，头部集中效应显著。第一峰与第二峰之间的"谷地"（50-100万区间）仅有22笔，说明违规行为要么是轻微的操作性问题，要么是系统性的重大缺陷，中间地带相对较少。</p>
+    </div>
+  </section>
+
+  <!-- ========== 机构vs个人对比 ========== -->
+  <section class="section">
+    <div class="section-title">机构与个人处罚对比</div>
+    <div class="chart-card">
+      <div class="chart-title">平均金额 / 最大金额 / 总金额对比（万元）</div>
+      <div id="chartCompare" class="chart-container"></div>
+    </div>
+    <div class="analysis-text">
+      <p>"双罚制"在本月得到充分体现，约每4笔处罚中就有1笔涉及个人问责。然而，个人处罚金额与机构处罚金额之间存在巨大落差——个人平均罚款仅为机构的2.8%，中位数差距更为悬殊（1.5万元 vs 59.15万元）。</p>
+      <p>这表明当前"双罚制"在<b>责任认定层面</b>已较为成熟，但在处罚力度上仍以机构担责为主，个人经济责任相对有限。值得注意的是，个人最大单笔罚款达42万元，说明在严重违规案件中，监管部门对直接责任人的追责力度正在加大。</p>
+    </div>
+  </section>
+
+  <!-- ========== Top 10 大额处罚 ========== -->
+  <section class="section">
+    <div class="section-title">Top 10 大额处罚</div>
+    <div class="chart-card">
+      <div class="chart-title">处罚金额排名前十</div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:50px">排名</th>
+              <th>当事人</th>
+              <th style="width:90px">金额(万元)</th>
+              <th>主要处罚分类</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank rank-1">1</span></td>
+              <td>寻汇支付有限公司（原传化支付有限公司）</td>
+              <td class="amount-highlight">1,431.60</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，金融消保，内部合规与风险管理</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-2">2</span></td>
+              <td>中原银行股份有限公司</td>
+              <td class="amount-highlight">884.37</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，征信与信用信息管理，金融统计，货币金银管理，网络安全与数据安全</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-3">3</span></td>
+              <td>中国银行股份有限公司海南省分行</td>
+              <td class="amount-highlight">764.84</td>
+              <td>征信与信用信息管理，金融统计，国库与财政资金管理</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">4</span></td>
+              <td>中国农业银行股份有限公司河南省分行</td>
+              <td class="amount-highlight">441.10</td>
+              <td>支付结算与账户管理，征信与信用信息管理，金融统计，货币金银管理，国库与财政资金管理，网络安全与数据安全</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">5</span></td>
+              <td>哈密市商业银行股份有限公司</td>
+              <td class="amount-highlight">383.60</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，征信与信用信息管理，货币金银管理，网络安全与数据安全</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">6</span></td>
+              <td>中国农业银行股份有限公司辽宁省分行</td>
+              <td class="amount-highlight">327.05</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，金融统计，货币金银管理，网络安全与数据安全</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">7</span></td>
+              <td>南宁市区农村信用合作联社</td>
+              <td class="amount-highlight">293.86</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，征信与信用信息管理，金融统计，国库与财政资金管理，网络安全与数据安全</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">8</span></td>
+              <td>兴业银行股份有限公司广州分行</td>
+              <td class="amount-highlight">251.35</td>
+              <td>支付结算与账户管理</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">9</span></td>
+              <td>中国光大银行股份有限公司合肥分行</td>
+              <td class="amount-highlight">225.57</td>
+              <td>反洗钱与客户身份识别</td>
+            </tr>
+            <tr>
+              <td><span class="rank rank-n">10</span></td>
+              <td>河北晋州农村商业银行股份有限公司</td>
+              <td class="amount-highlight">225.34</td>
+              <td>反洗钱与客户身份识别，支付结算与账户管理，征信与信用信息管理，金融统计，货币金银管理，国库与财政资金管理，网络安全与数据安全</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="analysis-text">
+      <p><b>案例一：寻汇支付1,431.60万元</b>——支付机构反洗钱与业务合规的系统性失守。作为本月最大罚单，涉及反洗钱、支付结算、金融消保、内部合规四大领域，属于典型的"全方位合规崩塌"。</p>
+      <p><b>案例二：中原银行884.37万元</b>——城商行多领域合规短板集中暴露。涉及六大违规领域，几乎覆盖人民银行所有核心监管职能，反映出部分城商行在快速扩张过程中合规管理体系未能同步跟上。</p>
+      <p><b>案例三：中国银行海南省分行764.84万元</b>——大行分支机构征信与统计问题突出。暴露出"总行制度完善、分支执行走样"的普遍问题。</p>
+    </div>
+  </section>
+
+  <!-- ========== 监管趋势洞察 ========== -->
+  <section class="section">
+    <div class="section-title">监管趋势洞察</div>
+    <div class="insight-box">
+      <p>&#x1F534; <b>趋势一：反洗钱监管持续加码</b>，穿透式审查成为常态。监管正从"制度有无"向"执行效果"转变，客户尽职调查的穿透深度、受益所有人识别的准确性将成为检查重点。</p>
+    </div>
+    <div class="insight-box">
+      <p>&#x1F7E1; <b>趋势二：数据安全与网络安全监管快速升温</b>。在《数据安全法》《个人信息保护法》背景下，该领域处罚预计将呈上升趋势，城商行和数字化转型中的机构需重点关注。</p>
+    </div>
+    <div class="insight-box">
+      <p>&#x1F535; <b>趋势三：多领域叠加违规推高处罚金额</b>。"打包式"处罚成为常态，机构需建立覆盖全业务条线的合规管理体系，避免"单点突破"演变为"全面崩塌"。</p>
+    </div>
+    <div class="insight-box">
+      <p>&#x1F7E2; <b>趋势四：中小金融机构合规压力持续加大</b>。农商行、农信社、村镇银行合计占全部处罚的54.4%，监管标准的统一化和科技监管手段的应用将进一步凸显中小机构的合规资源劣势。</p>
+    </div>
+    <div class="insight-box">
+      <p>&#x1F7E3; <b>趋势五："双罚制"问责力度逐步增强</b>。个人处罚覆盖面在扩大，未来对直接责任人和管理层的个人问责力度有望进一步加强，"既罚机构也罚人"将成为常态。</p>
+    </div>
+  </section>
+
+  <!-- ========== 重点合规建议（仅面向金融机构） ========== -->
+  <section class="section">
+    <div class="section-title">重点合规建议</div>
+
+    <div class="advice-card">
+      <h3>
+        <span class="icon" style="background:rgba(229,62,62,0.1);color:var(--red);">&#x1F6D1;</span>
+        建议一：将反洗钱合规提升至战略优先级
+      </h3>
+      <ul>
+        <li>建立覆盖全业务的反洗钱风险评估机制，对高风险业务和客户实施差异化管控</li>
+        <li>加强客户尽职调查的穿透性，特别是对受益所有人、复杂股权结构的识别能力</li>
+        <li>提升可疑交易监测系统的智能化水平，减少漏报、迟报，提高报告质量</li>
+        <li>定期开展反洗钱专项审计，确保内控制度有效执行而非流于形式</li>
+      </ul>
+    </div>
+
+    <div class="advice-card">
+      <h3>
+        <span class="icon" style="background:rgba(43,108,176,0.1);color:var(--secondary);">&#x1F4CA;</span>
+        建议二：构建全领域合规管理矩阵
+      </h3>
+      <ul>
+        <li>针对反洗钱、征信管理、金融统计、支付结算四大高频违规领域，建立跨部门合规协调机制</li>
+        <li>制定各业务条线的合规操作清单，将监管要求转化为具体的操作规范</li>
+        <li>建立合规风险预警指标体系，实现问题早发现、早整改</li>
+        <li>关注多领域叠加违规风险，避免"打包式"处罚导致金额飙升</li>
+      </ul>
+    </div>
+
+    <div class="advice-card">
+      <h3>
+        <span class="icon" style="background:rgba(221,107,32,0.1);color:var(--orange);">&#x1F512;</span>
+        建议三：加大数据安全与网络安全投入
+      </h3>
+      <ul>
+        <li>完善数据分类分级管理制度，落实数据安全保护技术措施</li>
+        <li>加强网络安全防护体系建设，定期开展安全评估和渗透测试</li>
+        <li>建立数据安全事件应急响应机制，确保快速处置安全事件</li>
+        <li>关注《数据安全法》《个人信息保护法》最新合规要求，及时更新内部制度</li>
+      </ul>
+    </div>
+
+    <div class="advice-card">
+      <h3>
+        <span class="icon" style="background:rgba(201,169,110,0.15);color:var(--gold);">&#x1F3AF;</span>
+        建议四：强化基层机构合规能力建设
+      </h3>
+      <ul>
+        <li>加大基层合规人员配置和培训投入，提升一线人员的合规意识和操作能力</li>
+        <li>推动合规管理数字化转型，利用科技手段降低合规成本</li>
+        <li>建立总行对分支机构的合规检查和督导机制，缩小"制度-执行"落差</li>
+        <li>中小金融机构应重点关注征信查询授权、账户实名制等基础合规领域</li>
+      </ul>
+    </div>
+
+    <div class="advice-card">
+      <h3>
+        <span class="icon" style="background:rgba(66,153,225,0.1);color:var(--light-blue);">&#x1F465;</span>
+        建议五：完善"双罚制"应对机制
+      </h3>
+      <ul>
+        <li>明确各岗位合规责任边界，建立责任追究制度</li>
+        <li>加强对高管和关键岗位人员的合规培训，提升个人合规意识</li>
+        <li>定期开展合规责任自查，及时发现和纠正个人层面的合规问题</li>
+        <li>关注个人处罚力度加大的趋势，做好关键岗位人员的合规风险防范</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer class="report-footer">
+  <div class="footer-line"></div>
+  <p>免责声明：本报告基于中国人民银行各分支机构公开发布的行政处罚信息整理分析，仅供参考。</p>
+  <p>报告中的数据与分析不构成任何法律意见或投资建议。如有疑问，请以官方发布信息为准。</p>
+  <p style="margin-top:8px;color:rgba(255,255,255,0.4);">Copyright &copy; 2026 合规数据分析. All Rights Reserved. V1.1</p>
+</footer>
+
+<script>
+(function() {
+  // ===== DATA =====
+  var data = {
+    byOrgType: [
+      {name:"农村商业银行", count:40, amount:2102.28},
+      {name:"国有大型商业银行", count:19, amount:2393.63},
+      {name:"农村信用社", count:16, amount:1054.92},
+      {name:"村镇银行", count:13, amount:258.05},
+      {name:"股份制商业银行", count:13, amount:1191.34},
+      {name:"城市商业银行", count:7, amount:1684.84},
+      {name:"政策性银行", count:3, amount:320.22},
+      {name:"支付机构", count:4, amount:1527.1},
+      {name:"民营银行", count:2, amount:74.4},
+      {name:"证券/财险", count:4, amount:300.19}
+    ],
+    byCategory: [
+      {name:"反洗钱与客户身份识别", value:73},
+      {name:"金融统计", value:49},
+      {name:"征信与信用信息管理", value:48},
+      {name:"支付结算与账户管理", value:46},
+      {name:"货币金银管理", value:29},
+      {name:"网络安全与数据安全", value:16},
+      {name:"国库与财政资金管理", value:13},
+      {name:"金融科技与信息系统", value:4}
+    ],
+    byProvince: [
+      {name:"安徽", count:10, amount:665.39},
+      {name:"广东", count:10, amount:813.73},
+      {name:"广西", count:9, amount:733.43},
+      {name:"河北", count:8, amount:537.03},
+      {name:"陕西", count:7, amount:211.75},
+      {name:"青海", count:7, amount:378.9},
+      {name:"福建", count:7, amount:283.09},
+      {name:"山东", count:7, amount:238.95},
+      {name:"山西", count:6, amount:180.67},
+      {name:"四川", count:6, amount:374.23}
+    ],
+    amountDist: [
+      {range:"0-10万", count:37},
+      {range:"10-50万", count:36},
+      {range:"50-100万", count:22},
+      {range:"100-500万", count:28},
+      {range:"500万以上", count:3}
+    ],
+    orgVsPerson: {
+      org: {count:97, total:11236.64, avg:115.84, max:1431.6},
+      person: {count:29, total:95.75, avg:3.3, max:42.0}
+    },
+    keywords: [
+      {word:"违反金融统计管理规定", count:60},
+      {word:"违反信用信息查询规定", count:31},
+      {word:"违反账户管理规定", count:30},
+      {word:"未按规定开展客户尽职调查", count:28},
+      {word:"未按规定报送统计/可疑交易", count:22},
+      {word:"违反反假货币管理规定", count:16},
+      {word:"违反网络安全/数据安全规定", count:12},
+      {word:"违反反洗钱管理规定", count:10},
+      {word:"违反征信管理规定", count:9},
+      {word:"违反支付结算管理规定", count:9},
+      {word:"占压财政存款", count:9},
+      {word:"违反人民币流通管理规定", count:9},
+      {word:"未按规定报告可疑交易", count:8},
+      {word:"客户尽职调查缺失", count:7}
+    ]
+  };
+
+  // ===== COLOR PALETTE =====
+  var colors = ['#1a365d','#2b6cb0','#4299e1','#63b3ed','#90cdf4','#c9a96e','#e8d5a3','#e53e3e','#fc8181','#feb2b2'];
+
+  // ===== CHART 1: 机构类型分布（横向柱状图） =====
+  var c1 = echarts.init(document.getElementById('chartOrgType'));
+  var orgNames = data.byOrgType.map(function(d){return d.name;}).reverse();
+  var orgCounts = data.byOrgType.map(function(d){return d.count;}).reverse();
+  var orgAmounts = data.byOrgType.map(function(d){return d.amount;}).reverse();
+  c1.setOption({
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {type: 'shadow'},
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12},
+      formatter: function(p) {
+        return '<b>' + p[0].name + '</b><br/>处罚数量：' + p[0].value + ' 件<br/>处罚金额：' + orgAmounts[p[0].dataIndex] + ' 万元';
+      }
+    },
+    legend: {
+      data: ['处罚数量'],
+      top: 0,
+      right: 10,
+      textStyle: {fontSize: 11, color: '#718096'}
+    },
+    grid: {left: 120, right: 40, top: 30, bottom: 20},
+    xAxis: {
+      type: 'value',
+      axisLine: {show: false},
+      axisTick: {show: false},
+      splitLine: {lineStyle: {color: '#edf2f7', type: 'dashed'}},
+      axisLabel: {fontSize: 11, color: '#718096'}
+    },
+    yAxis: {
+      type: 'category',
+      data: orgNames,
+      axisLine: {lineStyle: {color: '#e2e8f0'}},
+      axisTick: {show: false},
+      axisLabel: {fontSize: 11, color: '#4a5568'}
+    },
+    series: [{
+      name: '处罚数量',
+      type: 'bar',
+      data: orgCounts.map(function(v, i) {
+        var ci = (data.byOrgType.length - 1 - i) % colors.length;
+        return {
+          value: v,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+              {offset: 0, color: colors[ci]},
+              {offset: 1, color: colors[ci] + 'aa'}
+            ]),
+            borderRadius: [0, 4, 4, 0]
+          }
+        };
+      }),
+      barWidth: '55%',
+      label: {
+        show: true,
+        position: 'right',
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: '#1a365d',
+        formatter: '{c}件'
+      }
+    }]
+  });
+
+  // ===== CHART 2: 处罚分类分布（饼图） =====
+  var c2 = echarts.init(document.getElementById('chartCategory'));
+  var pieColors = ['#1a365d','#2b6cb0','#4299e1','#63b3ed','#c9a96e','#e8d5a3','#e53e3e','#fc8181'];
+  c2.setOption({
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12},
+      formatter: '{b}<br/>出现次数：{c} 次 ({d}%)'
+    },
+    legend: {
+      type: 'scroll',
+      bottom: 0,
+      left: 'center',
+      textStyle: {fontSize: 11, color: '#718096'},
+      itemWidth: 12,
+      itemHeight: 12,
+      itemGap: 12
+    },
+    color: pieColors,
+    series: [{
+      type: 'pie',
+      radius: ['38%', '68%'],
+      center: ['50%', '42%'],
+      avoidLabelOverlap: true,
+      itemStyle: {
+        borderColor: '#fff',
+        borderWidth: 2,
+        borderRadius: 6
+      },
+      label: {
+        show: true,
+        fontSize: 11,
+        color: '#4a5568',
+        formatter: '{b}\n{d}%',
+        lineHeight: 16
+      },
+      labelLine: {length: 12, length2: 8},
+      emphasis: {
+        label: {fontSize: 13, fontWeight: 'bold'},
+        itemStyle: {shadowBlur: 10, shadowColor: 'rgba(0,0,0,0.15)'}
+      },
+      data: data.byCategory.map(function(d) {
+        return {name: d.name, value: d.value};
+      })
+    }]
+  });
+
+  // ===== CHART 3: 地区分布（柱状图） =====
+  var c3 = echarts.init(document.getElementById('chartProvince'));
+  var provNames = data.byProvince.map(function(d){return d.name;}).reverse();
+  var provCounts = data.byProvince.map(function(d){return d.count;}).reverse();
+  var provAmounts = data.byProvince.map(function(d){return d.amount;}).reverse();
+  c3.setOption({
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {type: 'shadow'},
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12},
+      formatter: function(p) {
+        return '<b>' + p[0].name + '</b><br/>处罚数量：' + p[0].value + ' 件<br/>处罚金额：' + provAmounts[p[0].dataIndex] + ' 万元';
+      }
+    },
+    legend: {
+      data: ['处罚数量'],
+      top: 0,
+      right: 10,
+      textStyle: {fontSize: 11, color: '#718096'}
+    },
+    grid: {left: 60, right: 40, top: 30, bottom: 20},
+    xAxis: {
+      type: 'category',
+      data: provNames,
+      axisLine: {lineStyle: {color: '#e2e8f0'}},
+      axisTick: {show: false},
+      axisLabel: {fontSize: 10, color: '#4a5568', rotate: 45}
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {show: false},
+      axisTick: {show: false},
+      splitLine: {lineStyle: {color: '#edf2f7', type: 'dashed'}},
+      axisLabel: {fontSize: 11, color: '#718096'}
+    },
+    series: [{
+      name: '处罚数量',
+      type: 'bar',
+      data: provCounts.map(function(v, i) {
+        var maxVal = Math.max.apply(null, provCounts);
+        var ratio = v / maxVal;
+        return {
+          value: v,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+              {offset: 0, color: '#2b6cb0'},
+              {offset: 1, color: ratio > 0.7 ? '#c9a96e' : '#4299e1'}
+            ]),
+            borderRadius: [4, 4, 0, 0]
+          }
+        };
+      }),
+      barWidth: '50%',
+      label: {
+        show: true,
+        position: 'top',
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: '#1a365d'
+      }
+    }]
+  });
+
+  // ===== CHART 4: 金额分布（柱状图） =====
+  var c4 = echarts.init(document.getElementById('chartAmount'));
+  var amtLabels = data.amountDist.map(function(d){return d.range;});
+  var amtCounts = data.amountDist.map(function(d){return d.count;});
+  var amtColors = ['#4299e1','#63b3ed','#c9a96e','#e8d5a3','#e53e3e'];
+  c4.setOption({
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {type: 'shadow'},
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12},
+      formatter: function(p) {
+        return '<b>' + p[0].name + '</b><br/>处罚数量：' + p[0].value + ' 件';
+      }
+    },
+    grid: {left: 50, right: 20, top: 20, bottom: 30},
+    xAxis: {
+      type: 'category',
+      data: amtLabels,
+      axisLine: {lineStyle: {color: '#e2e8f0'}},
+      axisTick: {show: false},
+      axisLabel: {fontSize: 11, color: '#4a5568'}
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {show: false},
+      axisTick: {show: false},
+      splitLine: {lineStyle: {color: '#edf2f7', type: 'dashed'}},
+      axisLabel: {fontSize: 11, color: '#718096'}
+    },
+    series: [{
+      type: 'bar',
+      data: amtCounts.map(function(v, i) {
+        return {
+          value: v,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+              {offset: 0, color: amtColors[i] + 'aa'},
+              {offset: 1, color: amtColors[i]}
+            ]),
+            borderRadius: [6, 6, 0, 0]
+          }
+        };
+      }),
+      barWidth: '50%',
+      label: {
+        show: true,
+        position: 'top',
+        fontSize: 13,
+        fontWeight: 'bold',
+        color: '#1a365d',
+        formatter: '{c}件'
+      }
+    }]
+  });
+
+  // ===== CHART 5: 机构vs个人对比 =====
+  var c5 = echarts.init(document.getElementById('chartCompare'));
+  var ovp = data.orgVsPerson;
+  c5.setOption({
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {type: 'shadow'},
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12}
+    },
+    legend: {
+      data: ['机构', '个人'],
+      top: 0,
+      textStyle: {fontSize: 12, color: '#718096'},
+      itemWidth: 14,
+      itemHeight: 14
+    },
+    grid: {left: 60, right: 30, top: 40, bottom: 30},
+    xAxis: {
+      type: 'category',
+      data: ['平均金额', '最大金额', '总金额'],
+      axisLine: {lineStyle: {color: '#e2e8f0'}},
+      axisTick: {show: false},
+      axisLabel: {fontSize: 12, color: '#4a5568'}
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: {show: false},
+      axisTick: {show: false},
+      splitLine: {lineStyle: {color: '#edf2f7', type: 'dashed'}},
+      axisLabel: {
+        fontSize: 11,
+        color: '#718096',
+        formatter: function(v) {
+          if (v >= 10000) return (v / 10000).toFixed(1) + '亿';
+          if (v >= 1000) return (v / 1000).toFixed(1) + 'k';
+          return v;
+        }
+      }
+    },
+    series: [
+      {
+        name: '机构',
+        type: 'bar',
+        data: [
+          {value: ovp.org.avg, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#1a365d'},{offset:1,color:'#2b6cb0'}]), borderRadius:[6,6,0,0]}},
+          {value: ovp.org.max, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#1a365d'},{offset:1,color:'#2b6cb0'}]), borderRadius:[6,6,0,0]}},
+          {value: ovp.org.total, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#1a365d'},{offset:1,color:'#2b6cb0'}]), borderRadius:[6,6,0,0]}}
+        ],
+        barWidth: '30%',
+        label: {
+          show: true,
+          position: 'top',
+          fontSize: 11,
+          fontWeight: 'bold',
+          color: '#1a365d',
+          formatter: function(p) { return p.value.toLocaleString(); }
+        }
+      },
+      {
+        name: '个人',
+        type: 'bar',
+        data: [
+          {value: ovp.person.avg, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#c9a96e'},{offset:1,color:'#e8d5a3'}]), borderRadius:[6,6,0,0]}},
+          {value: ovp.person.max, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#c9a96e'},{offset:1,color:'#e8d5a3'}]), borderRadius:[6,6,0,0]}},
+          {value: ovp.person.total, itemStyle: {color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#c9a96e'},{offset:1,color:'#e8d5a3'}]), borderRadius:[6,6,0,0]}}
+        ],
+        barWidth: '30%',
+        label: {
+          show: true,
+          position: 'top',
+          fontSize: 11,
+          fontWeight: 'bold',
+          color: '#c9a96e',
+          formatter: function(p) { return p.value.toLocaleString(); }
+        }
+      }
+    ]
+  });
+
+  // ===== CHART 6: 违规关键词频次（横向柱状图） =====
+  var c6 = echarts.init(document.getElementById('chartKeywords'));
+  var kwNames = data.keywords.map(function(d){return d.word;}).reverse();
+  var kwCounts = data.keywords.map(function(d){return d.count;}).reverse();
+  c6.setOption({
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {type: 'shadow'},
+      backgroundColor: 'rgba(26,54,93,0.95)',
+      borderColor: 'rgba(201,169,110,0.3)',
+      textStyle: {color: '#fff', fontSize: 12},
+      formatter: function(p) {
+        return '<b>' + p[0].name + '</b><br/>出现次数：' + p[0].value + ' 次';
+      }
+    },
+    grid: {left: 200, right: 40, top: 10, bottom: 20},
+    xAxis: {
+      type: 'value',
+      axisLine: {show: false},
+      axisTick: {show: false},
+      splitLine: {lineStyle: {color: '#edf2f7', type: 'dashed'}},
+      axisLabel: {fontSize: 11, color: '#718096'}
+    },
+    yAxis: {
+      type: 'category',
+      data: kwNames,
+      axisLine: {lineStyle: {color: '#e2e8f0'}},
+      axisTick: {show: false},
+      axisLabel: {fontSize: 11, color: '#4a5568', width: 180, overflow: 'truncate'}
+    },
+    series: [{
+      type: 'bar',
+      data: kwCounts.map(function(v, i) {
+        var maxVal = Math.max.apply(null, kwCounts);
+        var ratio = v / maxVal;
+        var barColor;
+        if (ratio > 0.7) barColor = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{offset:0,color:'#e53e3e'},{offset:1,color:'#fc8181'}]);
+        else if (ratio > 0.4) barColor = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{offset:0,color:'#c9a96e'},{offset:1,color:'#e8d5a3'}]);
+        else barColor = new echarts.graphic.LinearGradient(0, 0, 1, 0, [{offset:0,color:'#4299e1'},{offset:1,color:'#90cdf4'}]);
+        return {
+          value: v,
+          itemStyle: {
+            color: barColor,
+            borderRadius: [0, 4, 4, 0]
+          }
+        };
+      }),
+      barWidth: '55%',
+      label: {
+        show: true,
+        position: 'right',
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: '#1a365d',
+        formatter: '{c}次'
+      }
+    }]
+  });
+
+  // ===== RESPONSIVE =====
+  var charts = [c1, c2, c3, c4, c5, c6];
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      charts.forEach(function(c) { c.resize(); });
+    }, 200);
+  });
+})();
+</script>
+
+</body>
+</html>
